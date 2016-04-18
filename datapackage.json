@@ -62,17 +62,6 @@
           "Price"
         ]
       }
-    },
-    {
-      "id": "Graph",
-      "type": "Graph",
-      "state": {
-        "graphType": "lines",
-        "group": "Date",
-        "series": [
-          "Price"
-        ]
-      }
     }
   ]
 }
