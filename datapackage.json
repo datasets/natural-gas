@@ -1,0 +1,71 @@
+{
+  "name": "big-mac-index",
+  "title": "Big Mac Index",
+  "descriptions": "Survey done by The Economist magazine that is used to measure the purchasing power parity (PPP) between nations, using the price of a Big Mac as the benchmark.",
+  "licenses" : [
+    {
+      "type": "odc-pddl",
+      "url": "http://opendatacommons.org/licenses/pddl/"
+    }
+  ],
+  "keywords": [ "Big Mac", "BMI", "Big mac index", "Big Mac PPP"],
+  "version": "0.1.0",
+  "last_updated": "2016-04-17",
+  "sources": [
+    {
+      "name": "Economist",
+      "web": "http://www.economist.com/content/big-mac-index"
+    }
+  ],
+  "resources": [
+    { 
+      "path": "data/big-mac-index.csv",
+      "schema": {
+        "fields": [
+          {
+            "name": "Country",
+            "type": "string"
+          },
+          {
+            "name": "Date",
+            "type": "date",
+            "format": "yyyy-mm-dd"
+          },
+          {
+            "name": "Local price",
+            "type": "number"
+          },
+          {
+            "name": "Dollar ex",
+            "type": "number"
+          },
+          {
+            "name": "Dollar price",
+            "type": "number"
+          },
+          {
+            "name": "Dollar PPP",
+            "type": "number"
+          },
+          {
+            "name": "Dollar valuation",
+            "type": "number"
+          }
+        ]
+      }
+    }
+  ],
+  "views": [
+    {
+      "id": "Graph",
+      "type": "Graph",
+      "state": {
+        "graphType": "lines",
+        "group": "Country",
+        "series": [
+          "Dollar price"
+        ]
+      }
+    }
+  ]
+}
