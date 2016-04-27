@@ -11,8 +11,8 @@ def setup():
 	'''Crates the directorie for archive if they don't exist
 	
 	'''
-	if not os.path.exists('archive'):
-		os.mkdir('archive')
+	if not os.path.exists('../archive'):
+		os.mkdir('../archive')
 
 def retrieve():
     '''Downloades xls data to archive directory
@@ -21,9 +21,9 @@ def retrieve():
     source_daily = 'http://www.eia.gov/dnav/ng/hist_xls/RNGWHHDd.xls'
     source_monthly = 'http://www.eia.gov/dnav/ng/hist_xls/RNGWHHDm.xls'
     
-    daily_dest = os.path.join('archive', 'natural-gas-daily.xls')
+    daily_dest = os.path.join('../archive', 'natural-gas-daily.xls')
     urllib.urlretrieve(source_daily, daily_dest)
-    monthly_dest = os.path.join('archive', 'natural-gas-monthly.xls')
+    monthly_dest = os.path.join('../archive', 'natural-gas-monthly.xls')
     urllib.urlretrieve(source_monthly, monthly_dest)
     return daily_dest, monthly_dest
 
@@ -58,7 +58,7 @@ def process(data_dest):
     header = ['Date',
               'Price']
     data = get_data(data_dest)
-    with open('data/' + title, 'w') as csv_file:
+    with open('../data/' + title, 'w') as csv_file:
         csv_writer = csv.writer(csv_file)
         csv_writer.writerow(header)
         for row in data:
