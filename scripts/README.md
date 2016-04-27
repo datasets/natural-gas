@@ -15,7 +15,7 @@ Or Follow this link for download: https://pypi.python.org/pypi/xlrd
 
 ### Processing
 
-Run the following script from parrent directory to download and process the data:
+Run the following script from this directory to download and process the data:
 
 ```bash
 make data
