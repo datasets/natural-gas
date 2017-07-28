@@ -24,8 +24,7 @@
         "fields": [
           {
             "name": "Date",
-            "type": "date",
-            "format": "yyyy-mm-dd"
+            "type": "date"
           },
           {
             "name": "Price",
@@ -40,8 +39,7 @@
         "fields": [
           {
             "name": "Date",
-            "type": "date",
-            "format": "yyyy-mm-dd"
+            "type": "date"
           },
           {
             "name": "Price",
