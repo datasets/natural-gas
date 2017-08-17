@@ -2,59 +2,72 @@
   "name": "natural-gas",
   "title": "Natural gas",
   "descriptions": "Monthly and daily prices of Natural Gas",
-  "licenses" : [
+  "licenses": [
     {
       "type": "odc-pddl",
       "url": "http://opendatacommons.org/licenses/pddl/"
     }
   ],
-  "keywords": [ "Gas", "Natural gas", "Natural gas daily", "Natural gas monthly", "eia", "Natural gas eia"],
+  "keywords": [
+    "Gas",
+    "Natural gas",
+    "Natural gas daily",
+    "Natural gas monthly",
+    "eia",
+    "Natural gas eia"
+  ],
   "version": "0.1.0",
   "last_updated": "2016-04-18",
   "sources": [
     {
       "name": "EIA",
-      "web": "http://www.eia.gov/naturalgas"
+      "web": "http://www.eia.gov/naturalgas",
+      "title": "EIA"
     }
   ],
   "resources": [
-    { 
+    {
       "path": "data/natural-gas-daily.csv",
       "schema": {
         "fields": [
           {
             "name": "Date",
-            "type": "date"
+            "type": "date",
+            "format": "any"
           },
           {
             "name": "Price",
             "type": "string"
           }
         ]
-      }
+      },
+      "name": "natural-gas-daily"
     },
-    { 
+    {
       "path": "data/natural-gas-monthly.csv",
       "schema": {
         "fields": [
           {
             "name": "Date",
-            "type": "date"
+            "type": "date",
+            "format": "any"
           },
           {
             "name": "Price",
             "type": "string"
           }
         ]
-      }
+      },
+      "name": "natural-gas-monthly"
     }
   ],
   "views": [
     {
-      "id": "Graph",
-      "type": "Graph",
-      "state": {
-        "graphType": "lines",
+      "name": "graph",
+      "title": "Prices of Natural Gas",
+      "specType": "simple",
+      "spec": {
+        "type": "line",
         "group": "Date",
         "series": [
           "Price"
