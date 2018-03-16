@@ -4,8 +4,9 @@
   "descriptions": "Monthly and daily prices of Natural Gas",
   "licenses": [
     {
-      "type": "odc-pddl",
-      "url": "http://opendatacommons.org/licenses/pddl/"
+      "name": "ODC-PDDL-1.0",
+      "path": "http://opendatacommons.org/licenses/pddl/",
+      "title": "Open Data Commons Public Domain Dedication and License v1.0"
     }
   ],
   "keywords": [
@@ -21,7 +22,7 @@
   "sources": [
     {
       "name": "EIA",
-      "web": "http://www.eia.gov/naturalgas",
+      "path": "http://www.eia.gov/naturalgas",
       "title": "EIA"
     }
   ],
