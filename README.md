@@ -1,8 +1,12 @@
 Time series of major Natural Gas Prices including US Henry Hub. Data comes from U.S. Energy Information Administration [EIA](http://www.eia.gov/)
 
-## Data
+## Data
 
 Dataset contains Monthly and Daily prices of Natural gas, starting from January 1997, including April 2016. Prices are in nominal dollars.
+
+## Prpeartion 
+
+Go to the scripts directory and follow README
 
 ## License
 
