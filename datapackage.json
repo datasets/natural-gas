@@ -1,6 +1,6 @@
 {
-  "name": "natural-gas",
-  "title": "Natural gas",
+  "name": "natural-gas-prices",
+  "title": "Natural gas prices",
   "descriptions": "Monthly and daily prices of Natural Gas",
   "licenses": [
     {
