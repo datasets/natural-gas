@@ -11,10 +11,9 @@ def rename_resources(package: PackageWrapper):
     package.pkg.descriptor['resources'][1]['path'] = 'data/natural-gas-monthly.csv'
     yield package.pkg
     res_iter = iter(package)
-    first: ResourceWrapper = next(res_iter)
-    second: ResourceWrapper = next(res_iter)
-    yield first.it
-    yield second.it
+    res_iter = iter(package)
+    for res in  res_iter:
+        yield res.it
     yield from package
 
 
