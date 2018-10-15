@@ -1,3 +1,5 @@
+import datetime
+
 from dataflows import Flow, PackageWrapper, ResourceWrapper, validate
 from dataflows import add_metadata, dump_to_path, load, set_type, printer
 
@@ -15,6 +17,17 @@ def rename_resources(package: PackageWrapper):
     yield second.it
     yield from package
 
+
+def format_date(row):
+    if row.get('Date'):
+        # Float returned by XLS file is exactly 693594 less then ordinal number in python
+        pre_date = datetime.date(1997, 1, 7).fromordinal(int(row.get('Date') + 693594))
+        formated_date = datetime.datetime.strptime((str(pre_date)), "%Y-%m-%d").strftime('%Y-%m-%d')
+        row['Date'] = formated_date
+    if row.get('Month'):
+        pre_date = datetime.date(1997, 1, 7).fromordinal(int(row.get('Month') + 693594))
+        formated_date = datetime.datetime.strptime((str(pre_date)), "%Y-%m-%d").strftime('%Y-%m')
+        row['Month'] = formated_date
 
 natural_gas = Flow(
     add_metadata(
@@ -54,20 +67,20 @@ natural_gas = Flow(
         load_source='http://www.eia.gov/dnav/ng/hist_xls/RNGWHHDd.xls',
         format='xls',
         sheet=2,
-        skip_rows=3,
+        skip_rows=[1,2,3],
         headers=['Date', 'Price']
     ),
     load(
         load_source='http://www.eia.gov/dnav/ng/hist_xls/RNGWHHDm.xls',
         format='xls',
         sheet=2,
-        skip_rows=3,
+        skip_rows=[1,2,3],
         headers=['Month', 'Price']
     ),
-    # set_type('Date', type='date', format='any'),
-    # set_type('Month', type='yearmonth'),
-    # set_type('Price', type='float'),
     rename_resources,
+    format_date,
+    set_type('Date', resources='natural-gas-daily', type='date', format='any'),
+    set_type('Month',resources='natural-gas-monthly', type='yearmonth'),
     validate(),
     printer(),
     dump_to_path(),
