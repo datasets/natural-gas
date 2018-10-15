@@ -1,14 +1,8 @@
 {
-  "name": "natural-gas",
-  "title": "Natural gas prices",
-  "descriptions": "Monthly and daily prices of Natural Gas",
-  "licenses": [
-    {
-      "name": "ODC-PDDL-1.0",
-      "path": "http://opendatacommons.org/licenses/pddl/",
-      "title": "Open Data Commons Public Domain Dedication and License v1.0"
-    }
-  ],
+  "bytes": 359204,
+  "count_of_rows": 5739,
+  "descriptor": "Monthly and daily prices of Natural Gas",
+  "hash": "25a9ab04078469dac9b92412a6fcd49e",
   "keywords": [
     "Gas",
     "Natural gas",
@@ -17,8 +11,67 @@
     "eia",
     "Natural gas eia"
   ],
-  "version": "0.1.0",
-  "last_updated": "2016-04-18",
+  "licenses": [
+    {
+      "name": "ODC-PDDL-1.0",
+      "path": "http://opendatacommons.org/licenses/pddl/",
+      "title": "Open Data Commons Public Domain Dedication and License v1.0"
+    }
+  ],
+  "name": "natural-gas",
+  "profile": "data-package",
+  "resources": [
+    {
+      "encoding": "iso-8859-5",
+      "format": "xls",
+      "mediatype": "text/xls",
+      "name": "natural-gas-daily",
+      "path": "data/natural-gas-daily.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "format": "any",
+            "name": "Date",
+            "type": "date"
+          },
+          {
+            "format": "default",
+            "name": "Price",
+            "type": "number"
+          }
+        ],
+        "missingValues": [
+          ""
+        ]
+      }
+    },
+    {
+      "encoding": "iso-8859-5",
+      "format": "xls",
+      "mediatype": "text/xls",
+      "name": "natural-gas-monthly",
+      "path": "data/natural-gas-monthly.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "format": "default",
+            "name": "Month",
+            "type": "yearmonth"
+          },
+          {
+            "format": "default",
+            "name": "Price",
+            "type": "number"
+          }
+        ],
+        "missingValues": [
+          ""
+        ]
+      }
+    }
+  ],
   "sources": [
     {
       "name": "EIA",
@@ -26,54 +79,20 @@
       "title": "EIA"
     }
   ],
-  "resources": [
-    {
-      "path": "data/natural-gas-daily.csv",
-      "schema": {
-        "fields": [
-          {
-            "name": "Date",
-            "type": "date",
-            "format": "any"
-          },
-          {
-            "name": "Price",
-            "type": "string"
-          }
-        ]
-      },
-      "name": "natural-gas-daily"
-    },
-    {
-      "path": "data/natural-gas-monthly.csv",
-      "schema": {
-        "fields": [
-          {
-            "name": "Date",
-            "type": "date",
-            "format": "any"
-          },
-          {
-            "name": "Price",
-            "type": "string"
-          }
-        ]
-      },
-      "name": "natural-gas-monthly"
-    }
-  ],
+  "title": "Natural gas prices",
+  "version": "0.2.0",
   "views": [
     {
       "name": "graph",
-      "title": "Prices of Natural Gas",
-      "specType": "simple",
       "spec": {
-        "type": "line",
         "group": "Date",
         "series": [
           "Price"
-        ]
-      }
+        ],
+        "type": "line"
+      },
+      "specType": "simple",
+      "title": "Prices of Natural Gas"
     }
   ]
 }
