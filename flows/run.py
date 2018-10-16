@@ -11,7 +11,6 @@ def rename_resources(package: PackageWrapper):
     package.pkg.descriptor['resources'][1]['path'] = 'data/natural-gas-monthly.csv'
     yield package.pkg
     res_iter = iter(package)
-    res_iter = iter(package)
     for res in  res_iter:
         yield res.it
     yield from package
@@ -20,12 +19,10 @@ def rename_resources(package: PackageWrapper):
 def format_date(row):
     if row.get('Date'):
         # Float returned by XLS file is exactly 693594 less then ordinal number in python
-        pre_date = datetime.date(1997, 1, 7).fromordinal(int(row.get('Date') + 693594))
-        formated_date = datetime.datetime.strptime((str(pre_date)), "%Y-%m-%d").strftime('%Y-%m-%d')
+        formated_date = datetime.date(1997, 1, 7).fromordinal(int(row.get('Date') + 693594))
         row['Date'] = formated_date
     if row.get('Month'):
-        pre_date = datetime.date(1997, 1, 7).fromordinal(int(row.get('Month') + 693594))
-        formated_date = datetime.datetime.strptime((str(pre_date)), "%Y-%m-%d").strftime('%Y-%m')
+        formated_date = datetime.date(1997, 1, 7).fromordinal(int(row.get('Month') + 693594)).strftime('%Y-%m')
         row['Month'] = formated_date
 
 natural_gas = Flow(
@@ -66,14 +63,14 @@ natural_gas = Flow(
         load_source='http://www.eia.gov/dnav/ng/hist_xls/RNGWHHDd.xls',
         format='xls',
         sheet=2,
-        skip_rows=[1,2,3],
+        skip_rows=[1,2,3,-1],
         headers=['Date', 'Price']
     ),
     load(
         load_source='http://www.eia.gov/dnav/ng/hist_xls/RNGWHHDm.xls',
         format='xls',
         sheet=2,
-        skip_rows=[1,2,3],
+        skip_rows=[1,2,3,-1],
         headers=['Month', 'Price']
     ),
     rename_resources,
