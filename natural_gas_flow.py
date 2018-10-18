@@ -5,6 +5,11 @@ from dataflows import Flow, validate, update_resource
 from dataflows import add_metadata, dump_to_path, load, set_type, printer
 
 
+def readme(fpath='README.md'):
+    if os.path.exists(fpath):
+        return open(fpath).read()
+
+
 def format_date(row):
     if row.get('Date'):
         # Float returned by XLS file is exactly 693594 less then ordinal number in python
@@ -47,7 +52,8 @@ natural_gas = Flow(
                     "series": ["Price"]
               }
             }
-        ]
+        ],
+        readme=readme()
     ),
     load(
         load_source='http://www.eia.gov/dnav/ng/hist_xls/RNGWHHDd.xls',
