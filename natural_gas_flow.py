@@ -69,7 +69,7 @@ natural_gas = Flow(
         sheet=2,
         skip_rows=[1,2,3,-1],
         headers=['Month', 'Price'],
-        name='mothly'
+        name='monthly'
     ),
     format_date,
     set_type('Date', resources='daily', type='date'),
