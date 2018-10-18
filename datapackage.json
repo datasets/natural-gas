@@ -1,8 +1,8 @@
 {
-  "bytes": 359198,
-  "count_of_rows": 5737,
+  "bytes": 359456,
+  "count_of_rows": 5741,
   "descriptor": "Monthly and daily prices of Natural Gas",
-  "hash": "6ce86191a072fd0567fab6726f660e20",
+  "hash": "bdcc5129a733f4d65aa01d1f8530c84d",
   "keywords": [
     "Gas",
     "Natural gas",
@@ -20,18 +20,19 @@
   ],
   "name": "natural-gas",
   "profile": "data-package",
+  "readme": "Time series of major Natural Gas Prices including US Henry Hub. Data comes from U.S. Energy Information Administration [EIA](http://www.eia.gov/)\n\n## Data\n\nDataset contains Monthly and Daily prices of Natural gas, starting from January 1997 to current year. Prices are in nominal dollars.\n\n## Prpeartion\n\nYou will need Python 3.6 or greater and dataflows library to run the script\n\nTo update the data run the process script locally:\n\n```\n# Install dataflows\npip install dataflows\n\n# Run the script\npython natural_gas_flow.py\n```\n\n## License\n\n* Public domain and use of EIA content\n\nU.S. government publications are in the public domain and are not subject to copyright protection. One may use and/or distribute any of data,\nfiles, databases, reports, graphs, charts, and other information products that are on website.\nFor more information please visit: [Copyrights and Reuse](http://www.eia.gov/about/copyrights_reuse.cfm)\n",
   "resources": [
     {
-      "encoding": "iso-8859-5",
+      "dpp:streaming": true,
       "format": "xls",
       "mediatype": "text/xls",
-      "name": "natural-gas-daily",
-      "path": "data/natural-gas-daily.csv",
+      "name": "daily",
+      "path": "data/daily.csv",
       "profile": "tabular-data-resource",
       "schema": {
         "fields": [
           {
-            "format": "any",
+            "format": "default",
             "name": "Date",
             "type": "date"
           },
@@ -47,11 +48,11 @@
       }
     },
     {
-      "encoding": "iso-8859-5",
+      "dpp:streaming": true,
       "format": "xls",
       "mediatype": "text/xls",
-      "name": "natural-gas-monthly",
-      "path": "data/natural-gas-monthly.csv",
+      "name": "monthly",
+      "path": "data/monthly.csv",
       "profile": "tabular-data-resource",
       "schema": {
         "fields": [
