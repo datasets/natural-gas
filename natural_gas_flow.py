@@ -1,19 +1,8 @@
 import datetime
+import os
 
-from dataflows import Flow, PackageWrapper, ResourceWrapper, validate
+from dataflows import Flow, validate, update_resource
 from dataflows import add_metadata, dump_to_path, load, set_type, printer
-
-
-def rename_resources(package: PackageWrapper):
-    package.pkg.descriptor['resources'][0]['name'] = 'natural-gas-daily'
-    package.pkg.descriptor['resources'][0]['path'] = 'data/natural-gas-daily.csv'
-    package.pkg.descriptor['resources'][1]['name'] = 'natural-gas-monthly'
-    package.pkg.descriptor['resources'][1]['path'] = 'data/natural-gas-monthly.csv'
-    yield package.pkg
-    res_iter = iter(package)
-    for res in  res_iter:
-        yield res.it
-    yield from package
 
 
 def format_date(row):
@@ -24,6 +13,7 @@ def format_date(row):
     if row.get('Month'):
         formated_date = datetime.date(1997, 1, 7).fromordinal(int(row.get('Month') + 693594)).strftime('%Y-%m')
         row['Month'] = formated_date
+
 
 natural_gas = Flow(
     add_metadata(
@@ -64,23 +54,30 @@ natural_gas = Flow(
         format='xls',
         sheet=2,
         skip_rows=[1,2,3,-1],
-        headers=['Date', 'Price']
+        headers=['Date', 'Price'],
+        name='daily'
     ),
     load(
         load_source='http://www.eia.gov/dnav/ng/hist_xls/RNGWHHDm.xls',
         format='xls',
         sheet=2,
         skip_rows=[1,2,3,-1],
-        headers=['Month', 'Price']
+        headers=['Month', 'Price'],
+        name='mothly'
     ),
-    rename_resources,
     format_date,
-    set_type('Date', resources='natural-gas-daily', type='date', format='any'),
-    set_type('Month',resources='natural-gas-monthly', type='yearmonth'),
+    set_type('Date', resources='daily', type='date'),
+    set_type('Month',resources='monthly', type='yearmonth'),
+    update_resource('daily', **{'path':'data/daily.csv', 'dpp:streaming': True}),
+    update_resource('monthly', **{'path':'data/monthly.csv', 'dpp:streaming': True}),
     validate(),
     printer(),
     dump_to_path(),
 )
+
+
+def flow(parameters, datapackage, resources, stats):
+    return natural_gas
 
 
 if __name__ == '__main__':
