@@ -1,8 +1,7 @@
 import datetime
 import os
 
-from dataflows import Flow, validate, update_resource
-from dataflows import add_metadata, dump_to_path, load, set_type, printer
+from dataflows import Flow, validate, update_resource, add_metadata, load, set_type
 
 
 def readme(fpath='README.md'):
@@ -76,9 +75,7 @@ natural_gas = Flow(
     set_type('Month',resources='monthly', type='yearmonth'),
     update_resource('daily', **{'path':'data/daily.csv', 'dpp:streaming': True}),
     update_resource('monthly', **{'path':'data/monthly.csv', 'dpp:streaming': True}),
-    validate(),
-    printer(),
-    dump_to_path(),
+    validate()
 )
 
 
