@@ -4,7 +4,7 @@ Time series of major Natural Gas Prices including US Henry Hub. Data comes from 
 
 Dataset contains Monthly and Daily prices of Natural gas, starting from January 1997 to current year. Prices are in nominal dollars.
 
-## Prpeartion
+## Preparation
 
 You will need Python 3.6 or greater and dataflows library to run the script
 
