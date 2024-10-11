@@ -95,5 +95,6 @@
       "specType": "simple",
       "title": "Prices of Natural Gas"
     }
-  ]
+  ],
+  "collection": "stock-market-data"
 }
