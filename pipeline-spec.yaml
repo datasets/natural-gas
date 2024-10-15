@@ -1,6 +1,0 @@
-natural-gas-flow:
-  pipeline:
-    - flow: natural_gas_flow
-    - run: datahub.dump.to_datahub
-  schedule:
-    crontab: 59 23 * * *
