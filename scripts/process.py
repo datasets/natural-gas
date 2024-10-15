@@ -1,32 +1,40 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
 
-import urllib
 import os
-import datetime
 import csv
 import xlrd
+import json
+import datetime
+import requests
 
 def setup():
-	'''Crates the directorie for archive if they don't exist
+	'''
+        Crates the directorie for archive if they don't exist
 	'''
 	if not os.path.exists('../archive'):
 		os.mkdir('../archive')
 
 def retrieve():
-    '''Downloades xls data to archive directory
+    '''
+        Downloades xls data to archive directory
     '''
     source_daily = 'http://www.eia.gov/dnav/ng/hist_xls/RNGWHHDd.xls'
     source_monthly = 'http://www.eia.gov/dnav/ng/hist_xls/RNGWHHDm.xls'
 
     daily_dest = os.path.join('../archive', 'natural-gas-daily.xls')
-    urllib.urlretrieve(source_daily, daily_dest)
+    response_daily = requests.get(source_daily)
+    with open(daily_dest, 'wb') as daily_file:
+        daily_file.write(response_daily.content)
     monthly_dest = os.path.join('../archive', 'natural-gas-monthly.xls')
-    urllib.urlretrieve(source_monthly, monthly_dest)
+    response_monthly = requests.get(source_monthly)
+    with open(monthly_dest, 'wb') as monthly_file:
+        monthly_file.write(response_monthly.content)
     return daily_dest, monthly_dest
 
 def get_data(dest):
-    '''Gets the data from xls file and returns a ictionery of countries lists of it's data by year
+    '''
+        Gets the data from xls file and returns a ictionery of countries lists of it's data by year
     '''
     with xlrd.open_workbook(dest) as xls_data:
         sheet = xls_data.sheet_by_index(1)
@@ -43,14 +51,36 @@ def get_data(dest):
             data.append([formated_date,price])
         return data
 
-def process(data_dest):
-    '''takes dictionery of data as input and writes data into csv file
+def update_datapackage():
+    '''
+        Updates the datapackage.json file with the new data
+    '''
+    with open('../data/daily.csv', 'r') as csv_file:
+        daily_len = len(csv_file.readlines()) - 1
+    with open('../data/monthly.csv', 'r') as csv_file:
+        monthly_len = len(csv_file.readlines()) - 1   
 
+    # Count total size and len of rows in both files    
+    total_len = daily_len + monthly_len
+    total_size = os.path.getsize('../data/daily.csv') + os.path.getsize('../data/monthly.csv')
+
+    # Append values to the datapackage.json file
+    with open('../datapackage.json', 'r') as json_file:
+        data = json.load(json_file)
+        data['count_of_rows'] = total_len
+        data['bytes'] = total_size
+
+    with open('../datapackage.json', 'w') as json_file:
+        json.dump(data, json_file, indent=2)
+        
+def process(data_dest):
+    '''
+        takes dictionery of data as input and writes data into csv file
     '''
     if 'month' in data_dest:
-        title = 'natural-gas-monthly.csv'
+        title = 'monthly.csv'
     else:
-        title = 'natural-gas-daily.csv'
+        title = 'daily.csv'
     header = ['Date', 'Price']
     data = get_data(data_dest)
     with open('../data/' + title, 'w') as csv_file:
@@ -64,3 +94,4 @@ if __name__ == '__main__':
     dests = retrieve()
     for dest in dests:
         process(dest)
+    update_datapackage()

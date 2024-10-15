@@ -1,0 +1,4 @@
+dataflows==0.5.5
+requests==2.32.3
+DateTime==5.5
+xlrd==2.0.1
