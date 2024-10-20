@@ -78,10 +78,11 @@ def process(data_dest):
         takes dictionery of data as input and writes data into csv file
     '''
     if 'month' in data_dest:
+        header = ['Month', 'Price']
         title = 'monthly.csv'
     else:
         title = 'daily.csv'
-    header = ['Date', 'Price']
+        header = ['Date', 'Price']
     data = get_data(data_dest)
     with open('../data/' + title, 'w') as csv_file:
         csv_writer = csv.writer(csv_file)
