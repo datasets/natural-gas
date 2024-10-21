@@ -10,14 +10,14 @@ import requests
 
 def setup():
 	'''
-        Crates the directorie for archive if they don't exist
+        Creates the archive directory if it doesn't exist
 	'''
 	if not os.path.exists('../archive'):
 		os.mkdir('../archive')
 
 def retrieve():
     '''
-        Downloades xls data to archive directory
+        Downloades the xls files from the source and returns the destination of the files
     '''
     source_daily = 'http://www.eia.gov/dnav/ng/hist_xls/RNGWHHDd.xls'
     source_monthly = 'http://www.eia.gov/dnav/ng/hist_xls/RNGWHHDm.xls'
@@ -34,7 +34,7 @@ def retrieve():
 
 def get_data(dest):
     '''
-        Gets the data from xls file and returns a ictionery of countries lists of it's data by year
+        Gets the data from xls file and returns a list of lists
     '''
     with xlrd.open_workbook(dest) as xls_data:
         sheet = xls_data.sheet_by_index(1)
@@ -75,7 +75,7 @@ def update_datapackage():
         
 def process(data_dest):
     '''
-        takes dictionery of data as input and writes data into csv file
+        Processes the data and writes it to a csv file
     '''
     if 'month' in data_dest:
         header = ['Month', 'Price']
