@@ -17,7 +17,7 @@ def setup():
 
 def retrieve():
     '''
-        Downloades the xls files from the source and returns the destination of the files
+        Downloads the xls files from the source and returns the destination of the files
     '''
     source_daily = 'http://www.eia.gov/dnav/ng/hist_xls/RNGWHHDd.xls'
     source_monthly = 'http://www.eia.gov/dnav/ng/hist_xls/RNGWHHDm.xls'
