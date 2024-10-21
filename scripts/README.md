@@ -4,21 +4,14 @@ convert Natural Gas price data to a data package resource
     
 ### Reqirements
 
-Data preperation requires Python 2.
-Also needs xlrd module to be installed for Python
-
-Install with pip:
-```
-$ pip install xlrd
-```
-Or Follow this link for download: https://pypi.python.org/pypi/xlrd
+Data preperation requires Python 3.
 
 ### Processing
 
 Run the following script from this directory to download and process the data:
 
 ```bash
-make data
+make
 ```
 
 The processed data is output to ../data
