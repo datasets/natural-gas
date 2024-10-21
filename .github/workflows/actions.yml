@@ -1,23 +1,18 @@
-# 59 23 * * *
-
 name: Update natural gas data
 
 on:
-  # Schedule to run on the 1st day of each month
+  # Schedule to run on daily basis at 00:00 UTC
   schedule:
-    - cron: '59 23 * * *'
+    - cron: '0 0 * * *'
 
-  # Run on push to master branch
   push:
     branches:
       - main
 
-  # Run on pull requests targeting the master branch
   pull_request:
     branches:
       - main
 
-  # Allows manual triggering of the workflow
   workflow_dispatch: 
 
 jobs:
