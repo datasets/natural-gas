@@ -84,9 +84,10 @@
   "version": "0.2.0",
   "views": [
     {
+      "resources": ["monthly"],
       "name": "graph",
       "spec": {
-        "group": "Date",
+        "group": "Month",
         "series": [
           "Price"
         ],
