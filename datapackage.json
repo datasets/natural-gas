@@ -1,6 +1,6 @@
 {
-  "bytes": 122715,
-  "count_of_rows": 7313,
+  "bytes": 123700,
+  "count_of_rows": 7372,
   "descriptor": "Monthly and daily prices of Natural Gas",
   "hash": "bdcc5129a733f4d65aa01d1f8530c84d",
   "keywords": [
@@ -84,7 +84,9 @@
   "version": "0.2.0",
   "views": [
     {
-      "resources": ["monthly"],
+      "resources": [
+        "monthly"
+      ],
       "name": "graph",
       "spec": {
         "group": "Month",
