@@ -23,6 +23,18 @@
   "readme": "Time series of major Natural Gas Prices including US Henry Hub. Data comes from U.S. Energy Information Administration [EIA](http://www.eia.gov/)\n\n## Data\n\nDataset contains Monthly and Daily prices of Natural gas, starting from January 1997 to current year. Prices are in nominal dollars.\n\n## Prpeartion\n\nYou will need Python 3.6 or greater and dataflows library to run the script\n\nTo update the data run the process script locally:\n\n```\n# Install dataflows\npip install dataflows\n\n# Run the script\npython natural_gas_flow.py\n```\n\n## License\n\n* Public domain and use of EIA content\n\nU.S. government publications are in the public domain and are not subject to copyright protection. One may use and/or distribute any of data,\nfiles, databases, reports, graphs, charts, and other information products that are on website.\nFor more information please visit: [Copyrights and Reuse](http://www.eia.gov/about/copyrights_reuse.cfm)\n",
   "resources": [
     {
+      "name": "monthly-processed",
+      "path": "data/monthly-processed.csv",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "schema": {
+        "fields": [
+          { "name": "Date", "type": "date", "format": "%Y-%m-%d" },
+          { "name": "Price", "type": "number", "description": "Henry Hub spot price in USD per MMBtu" }
+        ]
+      }
+    },
+    {
       "dpp:streaming": true,
       "format": "xls",
       "mediatype": "text/xls",
@@ -83,6 +95,46 @@
   "title": "Natural gas prices",
   "version": "0.2.0",
   "views": [
+    {
+      "name": "price-history",
+      "title": "US Natural Gas Prices — Henry Hub (1997–present)",
+      "description": "Monthly Henry Hub spot price of natural gas in USD per million BTU. Key shocks: the 2000–01 California energy crisis spike, the 2005–06 post-Katrina surge, a 2008 commodity bubble peak, and the 2022 energy crisis driven by the Russia-Ukraine war. The shale revolution kept prices low from 2009 to 2020.",
+      "resources": ["monthly-processed"],
+      "specType": "plot",
+      "spec": {
+        "dateFields": ["Date"],
+        "height": 400,
+        "marginLeft": 60,
+        "x": { "label": null },
+        "y": { "label": "Price (USD per MMBtu)", "tickFormat": "$,.2f", "grid": true },
+        "marks": [
+          {
+            "type": "ruleX",
+            "staticData": [
+              { "x": "2000-12-01" }, { "x": "2005-09-01" },
+              { "x": "2008-07-01" }, { "x": "2022-08-01" }
+            ],
+            "x": "x", "stroke": "#e5e7eb", "tip": false
+          },
+          {
+            "type": "line",
+            "x": "Date", "y": "Price",
+            "stroke": "#0d9488", "strokeWidth": 1.5, "tip": true
+          },
+          {
+            "type": "text",
+            "staticData": [
+              { "x": "2000-12-01", "y": 14.5, "label": "CA crisis" },
+              { "x": "2005-09-01", "y": 14.5, "label": "Katrina" },
+              { "x": "2008-07-01", "y": 14.5, "label": "Peak" },
+              { "x": "2022-08-01", "y": 14.5, "label": "Russia-Ukraine" }
+            ],
+            "x": "x", "y": "y", "text": "label",
+            "fill": "#6b7280", "fontSize": 10, "textAnchor": "start", "rotate": -45
+          }
+        ]
+      }
+    },
     {
       "resources": [
         "monthly"
