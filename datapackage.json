@@ -40,7 +40,8 @@
             "description": "Henry Hub spot price in USD per MMBtu"
           }
         ]
-      }
+      },
+      "description": "Monthly Henry Hub natural gas spot prices in USD per MMBtu since 1997, with dates as ISO 8601 date strings, sourced from the U.S. Energy Information Administration (EIA)."
     },
     {
       "dpp:streaming": true,
@@ -65,7 +66,8 @@
         "missingValues": [
           ""
         ]
-      }
+      },
+      "description": "Daily Henry Hub natural gas spot prices in USD per MMBtu since 1997, sourced from the U.S. Energy Information Administration (EIA)."
     },
     {
       "dpp:streaming": true,
@@ -90,7 +92,8 @@
         "missingValues": [
           ""
         ]
-      }
+      },
+      "description": "Monthly average Henry Hub natural gas spot prices in USD per MMBtu since 1997, sourced from the U.S. Energy Information Administration (EIA)."
     }
   ],
   "sources": [
