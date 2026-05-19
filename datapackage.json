@@ -1,7 +1,7 @@
 {
   "bytes": 129526,
   "count_of_rows": 7721,
-  "descriptor": "Monthly and daily prices of Natural Gas",
+  "description": "Monthly and daily Henry Hub spot prices of natural gas in USD per MMBtu, sourced from the U.S. Energy Information Administration (EIA). Covers January 1997 to the present.",
   "hash": "bdcc5129a733f4d65aa01d1f8530c84d",
   "keywords": [
     "Gas",
@@ -27,12 +27,14 @@
       "path": "data/monthly-processed.csv",
       "format": "csv",
       "mediatype": "text/csv",
+      "description": "Monthly Henry Hub natural gas spot prices with dates anchored to the first of each month (YYYY-MM-DD), derived from the monthly series. Suitable for time-series charting.",
       "schema": {
         "fields": [
           {
             "name": "Date",
             "type": "date",
-            "format": "%Y-%m-%d"
+            "format": "default",
+            "description": "First day of the month in YYYY-MM-DD format (e.g. 2026-01-01 represents January 2026)"
           },
           {
             "name": "Price",
@@ -43,23 +45,23 @@
       }
     },
     {
-      "dpp:streaming": true,
-      "format": "xls",
-      "mediatype": "text/xls",
       "name": "daily",
       "path": "data/daily.csv",
-      "profile": "tabular-data-resource",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "description": "Daily Henry Hub natural gas spot prices in USD per MMBtu, starting January 1997. Only trading days are included; weekends and US holidays have no entry.",
       "schema": {
         "fields": [
           {
-            "format": "default",
             "name": "Date",
-            "type": "date"
+            "type": "date",
+            "format": "default",
+            "description": "Trading date in YYYY-MM-DD format"
           },
           {
-            "format": "default",
             "name": "Price",
-            "type": "number"
+            "type": "number",
+            "description": "Henry Hub spot price in USD per MMBtu"
           }
         ],
         "missingValues": [
@@ -68,23 +70,24 @@
       }
     },
     {
-      "dpp:streaming": true,
-      "format": "xls",
-      "mediatype": "text/xls",
       "name": "monthly",
       "path": "data/monthly.csv",
-      "profile": "tabular-data-resource",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "description": "Monthly Henry Hub natural gas spot prices in USD per MMBtu, starting January 1997.",
       "schema": {
         "fields": [
           {
-            "format": "default",
             "name": "Month",
-            "type": "yearmonth"
+            "type": "yearmonth",
+            "format": "default",
+            "description": "Month in YYYY-MM format"
           },
           {
-            "format": "default",
             "name": "Price",
-            "type": "number"
+            "type": "number",
+            "format": "default",
+            "description": "Henry Hub spot price in USD per MMBtu"
           }
         ],
         "missingValues": [
@@ -95,9 +98,14 @@
   ],
   "sources": [
     {
-      "name": "EIA",
-      "path": "http://www.eia.gov/naturalgas",
-      "title": "EIA"
+      "name": "EIA Henry Hub Daily Prices",
+      "path": "http://www.eia.gov/dnav/ng/hist_xls/RNGWHHDd.xls",
+      "title": "EIA Henry Hub Natural Gas Spot Price (Daily)"
+    },
+    {
+      "name": "EIA Henry Hub Monthly Prices",
+      "path": "http://www.eia.gov/dnav/ng/hist_xls/RNGWHHDm.xls",
+      "title": "EIA Henry Hub Natural Gas Spot Price (Monthly)"
     }
   ],
   "title": "Natural gas prices",
