@@ -109,9 +109,30 @@ def process(data_dest):
         for row in data:
             csv_writer.writerow(row)
 
+def process_monthly_processed():
+    '''
+        Derives monthly-processed.csv from monthly.csv by converting YYYY-MM
+        dates to YYYY-MM-DD (always the first of the month), for use in
+        charting tools that require full date values.
+    '''
+    data_dir = os.path.join(os.path.dirname(__file__), '..', 'data')
+    rows = []
+    with open(os.path.join(data_dir, 'monthly.csv'), 'r') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            date = datetime.datetime.strptime(row['Month'], '%Y-%m').date()
+            rows.append([date.strftime('%Y-%m-%d'), row['Price']])
+
+    with open(os.path.join(data_dir, 'monthly-processed.csv'), 'w') as f:
+        writer = csv.writer(f)
+        writer.writerow(['Date', 'Price'])
+        writer.writerows(rows)
+
+
 if __name__ == '__main__':
     setup()
     dests = retrieve()
     for dest in dests:
         process(dest)
+    process_monthly_processed()
     update_datapackage()
