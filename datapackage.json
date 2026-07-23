@@ -1,6 +1,6 @@
 {
-  "bytes": 130265,
-  "count_of_rows": 7765,
+  "bytes": 130348,
+  "count_of_rows": 7770,
   "description": "Monthly and daily Henry Hub spot prices of natural gas in USD per MMBtu, sourced from the U.S. Energy Information Administration (EIA). Covers January 1997 to the present.",
   "hash": "bdcc5129a733f4d65aa01d1f8530c84d",
   "keywords": [
